@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export default function useJsonFetch(url: string, initialData: any) {
   const [data, setData] = useState(initialData);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  //const timestampRef = useRef();
 
   useEffect(() => {
     setLoading(true);
@@ -21,8 +20,6 @@ export default function useJsonFetch(url: string, initialData: any) {
       .finally(() => {
         setLoading(false);
       }); 
-
-      //return () => void; clear function
-  }, []); // нет deps: [], значит не будет перезапускаться
+  }, []);
   return [{data, isLoading, error}];
 }
